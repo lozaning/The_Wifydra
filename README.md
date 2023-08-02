@@ -30,3 +30,7 @@ The Sub.ino file goes on all of the sub seed xaio radios. Each of the sub nodes 
 YOU MUST MANUALLY CHANGE THE BOARD ID FOR EVERY SUB
 
 If you dont change the Board ID all your radios will all just scan channel 1. There are 14 wifi channels, so iterate through those as you flash each sub
+
+# Powering the Wifydra
+The four holes above the Wifydra are labled ground and VCC are where the power is designed to be put into the board.
+The board expects to get 5v from its power source. There are a variety of options available to accomplish this. I've got an 18650 battery pack that outputs over usb c, but also has 5v and 3.3v outlets. I connect the 5v and ground from that to the VCC and ground on the board and it works great. You could also solder a USB C decoy trigger set to out put 5 volts and use a standard power bank. I've also had luck with power the entire thing by plugging in the USB C powert of the Dom ESP32-S3 feather TFT, but im not sure this is advisable as Im unclear on how much power draw this puts on the TFT feather to power all the Subs.  
