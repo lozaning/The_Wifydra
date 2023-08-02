@@ -3,6 +3,13 @@ Multi-headed 802.11 panopticon
 
 ![image](https://github.com/lozaning/The_Wifydra/assets/13127833/40c7db88-5f30-40e3-a340-c568a6b9d1a1)
 
+![image](https://github.com/lozaning/The_Wifydra/assets/13127833/05d1311d-2f22-4797-af1c-c54453f760cb)
+
+Two bodge cables are needed with the current revision of this PCB.
+The First goes from one of the two holes in the VCC holes above the ESP32-S3
+The Second goes from one of the +3v out from the ESP32-S3 and into the VIN of either the SD Card or the GPS. (I sent to the sd card)
+This is due to using +VCC for all the VIN net on the sub nodes and mistakenly using +5v for the VIN net on the ESP-32S3 and the peripherals connected to it. It should have all been the same net. 
+
 
 # BOM
 Name	Quantity	Manufacturer Part	Manufacturer
