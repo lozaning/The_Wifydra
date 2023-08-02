@@ -5,10 +5,17 @@ Multi-headed 802.11 panopticon
 
 ![image](https://github.com/lozaning/The_Wifydra/assets/13127833/05d1311d-2f22-4797-af1c-c54453f760cb)
 
+
+# Build Note 1
 Two bodge cables are needed with the current revision of this PCB.
 The First goes from one of the two holes in the VCC holes above the ESP32-S3
 The Second goes from one of the +3v out from the ESP32-S3 and into the VIN of either the SD Card or the GPS. (I sent to the sd card)
 This is due to using +VCC for all the VIN net on the sub nodes and mistakenly using +5v for the VIN net on the ESP-32S3 and the peripherals connected to it. It should have all been the same net. 
+
+# Build Note 2
+To ensure that home built feel for every wifydra, I made sure to not check the footprint of the seed xaio esp32-C3 that I used in this, resulting in the board having a larger footbring for these boards than should have been used. The chips themselves have castilated edges, and both power and ground are on the same side, so just scooch 'em over a bit and make sure you get those pins connected up to the board. 
+
+In the event I can make the swap over from ESP-NOW for Sub to DOM communications to i2c, I'll ensure to assign the pins to the ones on the same side as 5v and ground, so you'd only have to solder up more pins on the side already lined up.
 
 
 # BOM
