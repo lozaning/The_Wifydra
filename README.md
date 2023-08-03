@@ -29,7 +29,7 @@ Name	Quantity	Manufacturer Part	Manufacturer
 
 "ADAFRUIT FEATHER ESP32-S2 W/TFT"	"1"	"4264"	"Adafruit"
 
-"Seeedstudio XIAO"	"16"	"102010328"	"Seeedstudio" (These can be any combination of the esp32-c3 or esp32-s3 ones. The benefits of the s3 is that it support BOTH BT and LE)
+"Seeedstudio XIAO"	"16"	"113991054"	"Seeedstudio" (These can be any combination of the esp32-c3 or esp32-s3 ones. The benefits of the s3 is that it support BOTH BT and LE)
 
 # What to flash with what
 
