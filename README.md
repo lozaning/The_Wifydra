@@ -23,11 +23,11 @@ In the event I can make the swap over from ESP-NOW for Sub to DOM communications
 # BOM
 Name	Quantity	Manufacturer Part	Manufacturer
 
-"Adafruit_GPS"	"1"	"Adafruit Ultimate GPS Breakout - 66 channel w/10 Hz updates - Version 3"	""
+"Adafruit_GPS"	"1"	"Adafruit Ultimate GPS Breakout - 66 channel w/10 Hz updates - Version 3"	"AdAfruit"
 
-"MicroSD card breakout board+"	"1"	"Adafruit Ultimate GPS Breakout - 66 channel w/10 Hz updates - Version 3"	""
+"MicroSD card breakout board+"	"1"	"254"	"Adafruit"
 
-"ADAFRUIT FEATHER ESP32-S2 W/TFT"	"1"	"4264"	"Adafruit"
+"ADAFRUIT FEATHER ESP32-S3 W/TFT"	"1"	"5483"	"Adafruit"
 
 "Seeedstudio XIAO"	"16"	"113991054"	"Seeedstudio" (These can be any combination of the esp32-c3 or esp32-s3 ones. The benefits of the s3 is that it support BOTH BT and LE)
 
