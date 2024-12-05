@@ -25,7 +25,7 @@ static const uint32_t GPSBaud = 9600;   // GPS module default baud rate is 9600
 
 const String wigleHeaderFileFormat = "WigleWifi-1.4,appRelease=2.26,model=Feather,release=0.0.0,device=The_Wifydra,display=3fea5e7,board=esp8266,brand=Adafruit";
 char* log_col_names[LOG_COLUMN_COUNT] = {
-  "MAC", "SSID", "AuthMode", "FirstSeen", "Channel", "RSSI", "Latitude", "Longitude", "AltitudeMeters", "AccuracyMeters", "Type"
+  "MAC", "SSID", "AuthMode", "FirstSeen", "Channel", "RSSI", "CurrentLatitude", "CurrentLongitude", "AltitudeMeters", "AccuracyMeters", "Type"
 };
 
 Adafruit_ST7789 tft = Adafruit_ST7789(TFT_CS, TFT_DC, TFT_RST);
@@ -116,6 +116,7 @@ TinyGPSPlus gps;
 void OnDataRecv(const uint8_t* mac, const uint8_t* incomingData, int len) {
   File logFile = SD.open(logFileName, FILE_APPEND);
   memcpy(&myData, incomingData, sizeof(myData));
+  char buffer[10];
   Serial.print("Bytes received: ");
   Serial.println(len);
   Serial.print("Mac: ");
@@ -125,7 +126,9 @@ void OnDataRecv(const uint8_t* mac, const uint8_t* incomingData, int len) {
   Serial.print("SSID: ");
   Serial.println(myData.ssid);
   String SSIDString = myData.ssid;
-  SSIDString.replace(",", ".");  // Commas in SSID break the CSV
+  if(SSIDString.indexOf(",") > 0) {
+    SSIDString = "\""+SSIDString+"\""
+  }
   logFile.print(SSIDString);
   logFile.print(",");
   Serial.print("Encryption: ");
@@ -133,20 +136,38 @@ void OnDataRecv(const uint8_t* mac, const uint8_t* incomingData, int len) {
   logFile.print(myData.encryptionType);
   logFile.print(",");
   Serial.print("First seen: ");
+
+  //date
   Serial.println(gps.date.year());
   logFile.print(gps.date.year());
   logFile.print("-");
-  Serial.print(gps.date.month());
-  logFile.print(gps.date.month());
+
+  snprintf(buffer , sizeof buffer, "%02d", gps.time.month());
+  Serial.print(buffer);
+  logFile.print(buffer);
   logFile.print("-");
-  Serial.print(gps.time.hour());
-  logFile.print(gps.time.hour());
-  logFile.print("-");
-  Serial.print(gps.time.minute());
-  logFile.print(gps.time.minute());
-  logFile.print("-");
-  Serial.print(gps.time.second());
-  logFile.print(gps.time.second());
+
+  snprintf(buffer , sizeof buffer, "%02d", gps.time.day());
+  Serial.print(buffer);
+  logFile.print(buffer);
+
+  logFile.print(" ");
+
+  //time
+  snprintf(buffer , sizeof buffer, "%02d", gps.time.hour());
+  Serial.print(buffer);
+  logFile.print(buffer);
+  logFile.print(":");
+
+  snprintf(buffer , sizeof buffer, "%02d", gps.time.minute());
+  Serial.print(buffer);
+  logFile.print(buffer);
+  logFile.print(":");
+
+  snprintf(buffer , sizeof buffer, "%02d", gps.time.second());
+  Serial.print(buffer);
+  logFile.print(buffer);
+
   logFile.print(",");
   Serial.print("Channel: ");
   Serial.println(myData.channel);
@@ -165,15 +186,16 @@ void OnDataRecv(const uint8_t* mac, const uint8_t* incomingData, int len) {
   logFile.print(gps.location.lng(), 8);
   logFile.print(",");
   Serial.print("Altitude: ");
-  Serial.println(gps.altitude.meters());
-  logFile.print(gps.altitude.meters());
+  integerAltMeters = int(round(gps.altitude.meters()));
+  Serial.println(integerAltMeters);
+  logFile.print(integerAltMeters);
   logFile.print(",");
   Serial.print("HDOP: ");
   Serial.println(gps.hdop.value());
   logFile.print(gps.hdop.value());
   Serial.print("BiD: ");
   Serial.println(myData.boardID);  
-  logFile.print(",");
+  logFile.print(".0,");
   logFile.print("WIFI");
   logFile.println();
   logFile.close();
