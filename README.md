@@ -19,17 +19,16 @@ To ensure that home built feel for every wifydra, I made sure to not check the f
 
 In the event I can make the swap over from ESP-NOW for Sub to DOM communications to i2c, I'll ensure to assign the pins to the ones on the same side as 5v and ground, so you'd only have to solder up more pins on the side already lined up.
 
-
 # BOM
-Name	Quantity	Manufacturer Part	Manufacturer
 
-"Adafruit_GPS"	"1"	"Adafruit Ultimate GPS Breakout - 66 channel w/10 Hz updates - Version 3"	"AdAfruit"
+| Name                                                                             | Qty | Manufacturer Part   | Manufacturer |
+|----------------------------------------------------------------------------------|-----|---------------------|--------------|
+| [Adafruit Ultimate GPS Breakout](https://www.adafruit.com/product/4279)          | 1   | 4279                | Adafruit     |
+| [MicroSD card breakout board+](https://www.adafruit.com/product/254)             | 1   | 254                 | Adafruit     |
+| [Adafruit Feather ESP32-S3 w/ TFT](https://www.adafruit.com/product/5483)        | 1   | 5483                | Adafruit     |
+| [Seeedstudio XIAO](https://www.seeedstudio.com/Seeed-XIAO-ESP32C3-p-5431.html) ¹ | 16  | 113991054,113991114 | Seeedstudio  | 
 
-"MicroSD card breakout board+"	"1"	"254"	"Adafruit"
-
-"ADAFRUIT FEATHER ESP32-S3 W/TFT"	"1"	"5483"	"Adafruit"
-
-"Seeedstudio XIAO"	"16"	"113991054"	"Seeedstudio" (These can be any combination of the esp32-c3 or esp32-s3 ones. The benefits of the s3 is that it support BOTH BT and LE)
+¹ These can be any combination of the [esp32-c3](https://www.seeedstudio.com/Seeed-XIAO-ESP32C3-p-5431.html) or [esp32-s3](https://www.seeedstudio.com/XIAO-ESP32S3-p-5627.html) ones. The benefits of the s3 is that it support BOTH BT and LE
 
 # What to flash with what
 
