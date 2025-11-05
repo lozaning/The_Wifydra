@@ -1,11 +1,16 @@
 # Build tools
 bin/
+get-platformio.py
 
 # Arduino build artifacts
 *.hex
 *.elf
 *.map
 *.lst
+
+# PlatformIO
+.pio/
+src/
 
 # IDE files
 .vscode/
