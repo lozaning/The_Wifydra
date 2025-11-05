@@ -19,6 +19,7 @@ File myFile;
 char logFileName[13];
 int totalNetworks = 0;
 unsigned long lastLog = 0;
+int integerAltMeters = 0;
 
 // Static const int RXPin = 0, TXPin = 2;  // GPS module RXPin - GPIO 12 and TXPin - GPIO 13
 static const uint32_t GPSBaud = 9600;   // GPS module default baud rate is 9600
@@ -127,7 +128,7 @@ void OnDataRecv(const uint8_t* mac, const uint8_t* incomingData, int len) {
   Serial.println(myData.ssid);
   String SSIDString = myData.ssid;
   if(SSIDString.indexOf(",") > 0) {
-    SSIDString = "\""+SSIDString+"\""
+    SSIDString = "\""+SSIDString+"\"";
   }
   logFile.print(SSIDString);
   logFile.print(",");
@@ -142,12 +143,12 @@ void OnDataRecv(const uint8_t* mac, const uint8_t* incomingData, int len) {
   logFile.print(gps.date.year());
   logFile.print("-");
 
-  snprintf(buffer , sizeof buffer, "%02d", gps.time.month());
+  snprintf(buffer , sizeof buffer, "%02d", gps.date.month());
   Serial.print(buffer);
   logFile.print(buffer);
   logFile.print("-");
 
-  snprintf(buffer , sizeof buffer, "%02d", gps.time.day());
+  snprintf(buffer , sizeof buffer, "%02d", gps.date.day());
   Serial.print(buffer);
   logFile.print(buffer);
 
@@ -192,10 +193,11 @@ void OnDataRecv(const uint8_t* mac, const uint8_t* incomingData, int len) {
   logFile.print(",");
   Serial.print("HDOP: ");
   Serial.println(gps.hdop.value());
-  logFile.print(gps.hdop.value());
+  // Convert HDOP to accuracy in meters (HDOP*100 / 10 = rough accuracy)
+  logFile.print(gps.hdop.value() / 10.0, 1);
+  logFile.print(",");
   Serial.print("BiD: ");
-  Serial.println(myData.boardID);  
-  logFile.print(".0,");
+  Serial.println(myData.boardID);
   logFile.print("WIFI");
   logFile.println();
   logFile.close();
